@@ -90,6 +90,7 @@ obtainInstruction('steak', 0)
   })
   .then( () => {
     document.querySelector("#steak").innerHTML += `<li>${"Steak is ready!"}</li>`
+    document.querySelector("#steakImg").removeAttribute("hidden");
   })
     
 
@@ -104,6 +105,7 @@ async function makeBroccoli() {
     document.querySelector("#broccoli").innerHTML += `<li>${broccoli[i]}</li>`
   }
   document.querySelector("#broccoli").innerHTML += `<li>"Broccoli is ready!"</li>`
+  document.querySelector("#broccoliImg").removeAttribute("hidden");
 }
 
 
@@ -125,6 +127,27 @@ makeBroccoli();
 // ...
 
 // Bonus 2 - Promise all
+
+Promise.all
+
+
+const p1 = new Promise((resolve, reject) => {
+  document.querySelector("#brusselsSprouts").innerHTML += `<li>${step0}</li>`
+  return obtainInstruction('brusselsSprouts', 1)
+});
+ 
+const p2 = new Promise((resolve, reject) => {
+  document.querySelector("#brusselsSprouts").innerHTML += `<li>${step1}</li>`
+  return obtainInstruction('brusselsSprouts', 2)
+});
+ 
+const p3 = new Promise((resolve, reject) => {
+
+});
+ 
+ 
+Promise.all( [p1, p2] )
+  .then((values) => console.log("values", values));
 
 
 // ...
