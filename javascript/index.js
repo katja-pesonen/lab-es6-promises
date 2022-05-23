@@ -131,23 +131,32 @@ makeBroccoli();
 Promise.all
 
 
-const p1 = new Promise((resolve, reject) => {
-  document.querySelector("#brusselsSprouts").innerHTML += `<li>${step0}</li>`
-  return obtainInstruction('brusselsSprouts', 1)
-});
- 
-const p2 = new Promise((resolve, reject) => {
-  document.querySelector("#brusselsSprouts").innerHTML += `<li>${step1}</li>`
-  return obtainInstruction('brusselsSprouts', 2)
-});
- 
-const p3 = new Promise((resolve, reject) => {
+let allStepsArr = [];
 
-});
- 
- 
-Promise.all( [p1, p2] )
-  .then((values) => console.log("values", values));
+
+for (let i = 0; i < brusselsSprouts.length; i++) {
+  allStepsArr.push(obtainInstruction("brusselsSprouts", i));
+  document.querySelector(
+    "#brusselsSprouts"
+  ).innerHTML += `<li>${brusselsSprouts[i]}</li>`;
+}
+
+
+const allPromises = Promise.all(allStepsArr);
+
+
+allPromises
+  .then(() => {
+    document.querySelector(
+      "#brusselsSprouts"
+    ).innerHTML += `<li>Brussels Sprouts are ready!</li>`;
+  })
+  .catch(() => {
+    throw Error("I'm an error");
+  })
+  .finally(() => {
+    document.querySelector("#brusselsSproutsImg").removeAttribute("hidden");
+  });
 
 
 // ...
